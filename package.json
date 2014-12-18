@@ -1,0 +1,29 @@
+{
+  "name": "RequireKickstart",
+  "version": "0.0.1",
+  "description": "Project to allow the quickstart of a Require based JS project",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://LAD500@bitbucket.org/LAD500/requirekickstart.git"
+  },
+  "keywords": [
+    "Require",
+    "SASS",
+    "Bootstrap",
+    "Bower",
+    "Grunt",
+    "Jasmine",
+    "Karma"
+  ],
+  "author": "Nathan Richards",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
+  }
+}

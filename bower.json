@@ -1,0 +1,21 @@
+{
+  "name": "RequireKickstart",
+  "version": "0.0.1",
+  "authors": [
+    "Nathan Richards"
+  ],
+  "description": "Project to allow the quickstart of a Require based JS project",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "keywords": [
+    "Bootstrap",
+    "RequireJS"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.1",
+    "requirejs": "~2.1.15"
+  }
+}
