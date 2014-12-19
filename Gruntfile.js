@@ -36,8 +36,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jsonlint');
 
 //    grunt.registerTask('initSrc', ['copy:addBowerDepsToSrc]);
-    grunt.registerTask('test', ['jshint']);
+    grunt.registerTask('test', ['jsonlint', 'jshint']);
     grunt.registerTask('build', ['test']);
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['test']);
 
 };
