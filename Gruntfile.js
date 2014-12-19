@@ -14,16 +14,53 @@ module.exports = function(grunt) {
         jshint: {
             files: jsFiles
         },
-//        copy: {
-//            addBowerDepToSrc: {
-//                files: [
-//                    {expand: true, cwd: 'bower_components/bootstrap/dist/css/', src: '**', dest: 'src/css/', flatten: true, filter: 'isFile'},
-//                    {expand: true, cwd: 'bower_components/bootstrap/dist/js/', src: '**', dest: 'src/js/vendor/bootstrap/', flatten: true, filter: 'isFile'},
-//                    {expand: true, cwd: 'bower_components/bootstrap/dist/fonts/', src: '**', dest: 'src/fonts/', flatten: true, filter: 'isFile'},
-//                    {expand: true, cwd: 'bower_components/jquery/dist/', src: '**', dest: 'src/js/vendor/jquery/', flatten: true, filter: 'isFile'}
-//                ]
-//            }
-//        },
+        modernizr: {
+            dist: {
+                "devFile" : "bower_components/modernizr/modernizr.js",
+                "outputFile" : "src/js/libs/modernizr/modernizr.min.js",
+                "extra" : {
+                    "shiv" : true,
+                    "printshiv" : false,
+                    "load" : true,
+                    "mq" : false,
+                    "cssclasses" : true
+                },
+                "extensibility" : {
+                    "addtest" : false,
+                    "prefixed" : false,
+                    "teststyles" : false,
+                    "testprops" : false,
+                    "testallprops" : false,
+                    "hasevents" : false,
+                    "prefixes" : false,
+                    "domprefixes" : false,
+                    "cssclassprefix": ""
+                },
+                "uglify" : true,
+                "tests" : [],
+                "parseFiles" : true,
+                "files" : {
+                    "src": ['src/**/*.*']
+                },
+                "matchCommunityTests" : false,
+                "customTests" : []
+            }
+
+        },
+        uglify: {
+            requirejs: {
+                files: {
+                    'src/js/libs/require/require.min.js': ['bower_components/requirejs/require.js']
+                }
+            }
+        },
+        copy: {
+            bowerToSrc: {
+                files: [
+                    {expand: true, cwd: 'bower_components/jquery/dist/', src: 'jquery.min.js', dest: 'src/js/libs/jquery/', flatten: true, filter: 'isFile'}
+                ]
+            }
+        },
         watch: {
             files: jsFiles,
             tasks: ['test']
@@ -34,8 +71,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-jsonlint');
+    grunt.loadNpmTasks("grunt-modernizr");
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-//    grunt.registerTask('initSrc', ['copy:addBowerDepsToSrc]);
+    grunt.registerTask('jsLibs', ['copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint']);
     grunt.registerTask('build', ['test']);
     grunt.registerTask('default', ['test']);

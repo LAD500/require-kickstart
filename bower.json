@@ -11,11 +11,13 @@
   ],
   "keywords": [
     "Bootstrap",
-    "RequireJS"
+    "RequireJS",
+    "Modernizr"
   ],
   "license": "MIT",
   "dependencies": {
     "bootstrap-sass-official": "~3.3.1",
-    "requirejs": "~2.1.15"
+    "requirejs": "~2.1.15",
+    "modernizr": "~2.8.3"
   }
 }
