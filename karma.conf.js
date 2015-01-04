@@ -30,6 +30,10 @@ module.exports = function(config) {
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
         reporters: ['dots', 'coverage'],
 
+        coverageReporter: {
+            type : 'html',
+            dir : 'reports/istanbul'
+        },
 
         // web server port
         port: 9876,

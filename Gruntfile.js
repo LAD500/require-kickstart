@@ -5,6 +5,17 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        plato: {
+            src: {
+                options : {
+                    exclude: /\.min\.js$/
+                },
+                files: {
+                    'reports/plato': ['src/**/*.js'],
+                }
+            }
+        },
+
         jsonlint: {
             project: {
                 src: [ 'bower.json', 'package.json' ]
@@ -82,9 +93,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-modernizr");
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-plato');
 
-    grunt.registerTask('jsLibs', ['copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
-    grunt.registerTask('test', ['jsonlint', 'jshint']);
+    grunt.registerTask('importJSLibs', ['copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
+    grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
     grunt.registerTask('build', ['test']);
     grunt.registerTask('default', ['test']);
 
