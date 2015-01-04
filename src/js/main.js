@@ -2,15 +2,17 @@
 
 require.config({
     paths: {
-        jquery: ['//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',
-            'libs/jquery.min']
+        jquery: ['//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',  'libs/jquery/jquery.min']
     }
 });
 
-require(['jquery'], function ($) {
-    'use strict';
-    console.log($);
+define('modernizr', [], Modernizr);
 
-    alert("App starts here");
+require(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, SimpleApp) {
+    'use strict';
+
+    console.log("App starts here");
+
+    console.log(SimpleApp.add(2,3,4,5));
 });
 

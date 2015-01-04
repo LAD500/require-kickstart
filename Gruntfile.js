@@ -14,6 +14,14 @@ module.exports = function(grunt) {
         jshint: {
             files: jsFiles
         },
+        karma: {
+            unit: {
+                options: {
+                    configFile: 'karma.conf.js',
+                    runnerPort: 9999
+                }
+            }
+        },
         modernizr: {
             dist: {
                 "devFile" : "bower_components/modernizr/modernizr.js",
@@ -73,6 +81,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks("grunt-modernizr");
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('jsLibs', ['copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint']);
