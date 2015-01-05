@@ -12,7 +12,6 @@
   },
   "keywords": [
     "Require",
-    "SASS",
     "Bootstrap",
     "Bower",
     "Grunt",
@@ -48,5 +47,12 @@
     "karma-coverage": "^0.2.7",
     "karma-cli": "0.0.4",
     "grunt-plato": "^1.2.1"
+  },
+  "dependencies": {
+    "express": "^4.10.6",
+    "path": "^0.4.9",
+    "fs": "0.0.2",
+    "body-parser": "^1.10.1",
+    "method-override": "^2.3.1"
   }
 }

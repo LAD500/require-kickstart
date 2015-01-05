@@ -1,0 +1,5 @@
+{
+	"bid_id": 1,
+	"range": { "lowest": 200, "instantBuy": 1000},
+	"amount": 10 
+}

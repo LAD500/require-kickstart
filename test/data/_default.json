@@ -1,0 +1,26 @@
+[
+	{
+		"bid_id": 1,
+		"description": "Vintage Lamp",
+		"group": "Furniture",
+		"range": { "lowest": 10, "instantBuy": 100}
+	},
+	{
+		"bid_id": 2,
+		"description": "Silver fountain pen",
+		"group": "Stationary",
+		"range": { "lowest": 10}
+	},
+	{
+		"bid_id": 3,
+		"description": "Toy car",
+		"group": "Collectable",
+		"range": { "lowest": 31}
+	},
+	{
+		"bid_id": 4,
+		"description": "Moris Minor",
+		"group": "Automobile",
+		"range": { "lowest": 200, "instantBuy": 1000}
+	}
+]
