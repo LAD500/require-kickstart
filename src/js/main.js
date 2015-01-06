@@ -8,11 +8,14 @@ require.config({
 
 define('modernizr', [], Modernizr);
 
-require(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, SimpleApp) {
+require(['jquery', 'modernizr', 'app/simpleapp', 'app/xhrexample'], function ($, Modernizr, SimpleApp, XHRExample) {
     'use strict';
 
     console.log("App starts here");
 
     console.log(SimpleApp.add(2,3,4,5));
+
+    XHRExample.makeRequest();
+
 });
 
