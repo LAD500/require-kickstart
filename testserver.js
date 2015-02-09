@@ -7,20 +7,20 @@ var application_root = __dirname,
 
 //Create server
 var app = express();
-app.use(bodyParser.json());
-
-// static files
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/src'));
 
+// http....
 //Start server
 var port = 4711;
-app.listen( port, function() {
+var ip = "127.0.0.1"; // change to your machines ip for other devices to access
+app.listen( port, ip, function() {
     console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });
 
-app.get('/data', function(req, res){
+app.get('/getdata', function(req, res){
     var filePath = req.query.file || '_default.json';
-    var latency = parseInt(req.query.latency) || 0;
+    var delay = parseInt(req.query.delay) || 0;
     setTimeout(function() {
         var content = String(fs.readFileSync(path.join( application_root, "test/data/" , filePath)));
         res.header('Content-Type', 'application/json');
@@ -28,14 +28,25 @@ app.get('/data', function(req, res){
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         res.json(JSON.parse(content));
         res.status(200).end();
-    } , latency);
+    } , delay);
 });
 
-// TODO: create post request
+app.post('/postdata',function(req,res){
+    var filePath = req.body.file || '_default.json';
+    var delay = parseInt(req.body.delay) || 0;
+    setTimeout(function() {
+        var content = String(fs.readFileSync(path.join( application_root, "test/data/" , filePath)));
+        res.header('Content-Type', 'application/json');
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        res.json(JSON.parse(content));
+        res.status(200).end();
+    } , delay);
+});
+
 // TODO: create put request
 // TODO: create delete request
-
-// TODO: explore secure services
+// TODO: unit test the above functions
 
 
 
