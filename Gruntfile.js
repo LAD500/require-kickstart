@@ -80,6 +80,28 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        exec: {
+            installCompassGem: "gem install compass"
+        },
+        compass: {
+            dev: {
+                options: {
+                    sassDir: 'src/scss',
+                    cssDir: 'src/css',
+                    sourcemap: true,
+                    outputStyle: 'nested',
+                    force: true
+                }
+            },
+            production: {
+                options: {
+                    sassDir: 'src/scss',
+                    cssDir: 'src/css',
+                    sourcemap: false,
+                    outputStyle: 'compressed'
+                }
+            }
+        },
         watch: {
             files: jsFiles,
             tasks: ['test']
@@ -94,8 +116,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-plato');
+    grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-contrib-compass');
 
-    grunt.registerTask('importJSLibs', ['copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
+    grunt.registerTask('setUpDev', ['exec:installCompassGem', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
     grunt.registerTask('build', ['test']);
     grunt.registerTask('default', ['test']);
