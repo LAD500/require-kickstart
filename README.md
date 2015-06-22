@@ -3,7 +3,7 @@ RequireKickstart is a project template built to allow a quick up and running app
 
 **Prerequisites - You need to have Node, Ruby, and RubyGems installed**
 
-To get the project - download the zip file to get and unversioned copy
+**To get the project** - download the zip file to get and unversioned copy. If you want to use this as the start of your own development without contributing to this project be sure to delete the .git file.
 
 Once unzipped cd into the project and run 
 ```
