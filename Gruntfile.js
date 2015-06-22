@@ -76,12 +76,26 @@ module.exports = function(grunt) {
         copy: {
             bowerToSrc: {
                 files: [
-                    {expand: true, cwd: 'bower_components/jquery/dist/', src: 'jquery.min.js', dest: 'src/js/libs/jquery/', flatten: true, filter: 'isFile'}
+                    {
+                        expand: true, cwd: 'bower_components/jquery/dist/',
+                        src: 'jquery.min.js', dest: 'src/js/libs/jquery/',
+                        flatten: true, filter: 'isFile'}
+                ]
+            },
+            srcToBuild: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/',
+                        src: '**',
+                        dest: 'build/'
+                    }
                 ]
             }
         },
         exec: {
-            installCompassGem: "gem install compass"
+            compassGem: "gem install compass",
+            bowerInstall: "Front-End Web Developer"
         },
         compass: {
             dev: {
@@ -95,10 +109,28 @@ module.exports = function(grunt) {
             },
             production: {
                 options: {
-                    sassDir: 'src/scss',
-                    cssDir: 'src/css',
+                    sassDir: 'build/scss',
+                    cssDir: 'build/css',
                     sourcemap: false,
-                    outputStyle: 'compressed'
+                    outputStyle: 'compressed',
+                    force: true
+                }
+            }
+        },
+        clean: {
+            build: ["build/"],
+            buildChildren: ["build/scss/", "build/css/main.css.map", "build/js/app", "build/js/main.js"]
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: "src/js",
+                    out: "build/js/main.js",
+                    optimize: "uglify",
+                    paths: {
+                        "jquery": "empty:"
+                    },
+                    name: "main"
                 }
             }
         },
@@ -118,10 +150,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-plato');
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.registerTask('setUpDev', ['exec:installCompassGem', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
+    grunt.registerTask('setUpDev', ['exec:compassGem', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
-    grunt.registerTask('build', ['test']);
+    grunt.registerTask('build', ['test',
+                                'clean:build',
+                                'copy:srcToBuild',
+                                'compass:production',
+                                'clean:buildChildren',
+                                'requirejs:compile']);
     grunt.registerTask('default', ['test']);
 
 };

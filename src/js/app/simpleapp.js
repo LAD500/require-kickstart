@@ -23,7 +23,7 @@ define(['jquery'], function ($) {
                 console.log( "post error" );
             }).always(function() {
                 console.log( "post finished" );
-            });;
+            });
         },
         testPut : function () {
 

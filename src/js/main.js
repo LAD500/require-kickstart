@@ -8,7 +8,7 @@ require.config({
 
 define('modernizr', [], Modernizr);
 
-require(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, SimpleApp) {
+requirejs(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, SimpleApp) {
     'use strict';
 
     console.log("App starts here");
