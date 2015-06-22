@@ -83,10 +83,14 @@ crashlytics-build.properties
 # Used for output of reports by plato and istanbul
 reports
 
-
-
 ### Sass template
 .sass-cache/
 *.css.map
+
+### build files not needed
+build/
+
+### bootstrap font files
+src/fonts/bootstrap/
 
 

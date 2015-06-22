@@ -79,7 +79,14 @@ module.exports = function(grunt) {
                     {
                         expand: true, cwd: 'bower_components/jquery/dist/',
                         src: 'jquery.min.js', dest: 'src/js/libs/jquery/',
-                        flatten: true, filter: 'isFile'}
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'bower_components/bootstrap-sass-official/assets/fonts/',
+                        src: '**',
+                        dest: 'src/fonts'
+                    }
                 ]
             },
             srcToBuild: {
@@ -95,7 +102,7 @@ module.exports = function(grunt) {
         },
         exec: {
             compassGem: "gem install compass",
-            bowerInstall: "Front-End Web Developer"
+            bowerInstall: "bower install"
         },
         compass: {
             dev: {
@@ -134,6 +141,42 @@ module.exports = function(grunt) {
                 }
             }
         },
+        open : {
+            src : {
+                path: 'http://127.0.0.1:4788',
+                app: 'Google Chrome'
+            },
+            build : {
+                path: 'http://127.0.0.1:4789',
+                app: 'Google Chrome'
+            },
+            plato : {
+                path: __dirname + '/reports/plato/index.html',
+                app: 'Google Chrome'
+            }
+        },
+        nodemon: {
+            src: {
+                script: 'serversrc.js'
+            },
+            build: {
+                script: 'serverbuild.js'
+            }
+        },
+        concurrent: {
+            src: {
+                tasks: ['nodemon:src', 'open:src'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            },
+            build: {
+                tasks: ['nodemon:build', 'open:build'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        },
         watch: {
             files: jsFiles,
             tasks: ['test']
@@ -152,8 +195,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-open');
+    grunt.loadNpmTasks('grunt-nodemon');
+    grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('setUpDev', ['exec:compassGem', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
+    grunt.registerTask('setUpDev', ['exec:compassGem', 'exec:bowerInstall', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
     grunt.registerTask('build', ['test',
                                 'clean:build',
@@ -161,6 +207,9 @@ module.exports = function(grunt) {
                                 'compass:production',
                                 'clean:buildChildren',
                                 'requirejs:compile']);
+    grunt.registerTask('launchSrc', ['concurrent:src']);
+    grunt.registerTask('launchBuild', ['build','concurrent:build']);
+    grunt.registerTask('launchPlato', ['plato','open:plato']);
     grunt.registerTask('default', ['test']);
 
 };

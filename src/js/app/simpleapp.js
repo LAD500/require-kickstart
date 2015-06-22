@@ -1,4 +1,6 @@
 define(['jquery'], function ($) {
+    "use strict";
+
     var SimpleApp = {
         add : function () {
             var value = 0;
@@ -24,12 +26,6 @@ define(['jquery'], function ($) {
             }).always(function() {
                 console.log( "post finished" );
             });
-        },
-        testPut : function () {
-
-        },
-        testDelete : function () {
-
         }
     };
     return SimpleApp;
