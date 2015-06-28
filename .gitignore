@@ -92,5 +92,6 @@ build/
 
 ### bootstrap font files
 src/fonts/bootstrap/
+src/js/libs/
 
 

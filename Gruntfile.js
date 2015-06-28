@@ -82,6 +82,21 @@ module.exports = function(grunt) {
                         flatten: true, filter: 'isFile'
                     },
                     {
+                        expand: true, cwd: 'bower_components/angular/',
+                        src: 'angular.min.js', dest: 'src/js/libs/angular/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
+                        expand: true, cwd: 'bower_components/angularAMD/',
+                        src: 'angularAMD.min.js', dest: 'src/js/libs/angularAMD/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
+                        expand: true, cwd: 'bower_components/angularAMD/',
+                        src: 'ngload.min.js', dest: 'src/js/libs/angularAMD/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
                         expand: true,
                         cwd: 'bower_components/bootstrap-sass-official/assets/fonts/',
                         src: '**',
