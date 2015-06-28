@@ -36,4 +36,3 @@ This will organise your src file so that it can run the basic JS app. All your p
 - **grunt launchBuild** - runs the build job and starts a node server that runs your app from the build folder. It then launches the index page in Google Chrome.
 - **grunt launchPlato** - runs the Plato metrics job and then opens the index page of that report in Google Chrome.
 
-Note: - this is a continious work in progress not a finished product.
