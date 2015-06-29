@@ -11,7 +11,7 @@ require.config({
         'angularAMD': ['angular'],
         'ngload': ['angularAMD']
     },
-    deps: ['app/bootstrap']
+    deps: ['app/app']
 });
 
 define('modernizr', [], Modernizr);

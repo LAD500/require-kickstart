@@ -141,7 +141,7 @@ module.exports = function(grunt) {
         },
         clean: {
             build: ["build/"],
-            buildChildren: ["build/scss/", "build/css/main.css.map", "build/js/app", "build/js/main.js"]
+            buildChildren: ["build/scss/", "build/css/main.css.map", "build/js/main.js"]
         },
         requirejs: {
             compile: {
@@ -150,7 +150,10 @@ module.exports = function(grunt) {
                     out: "build/js/main.js",
                     optimize: "uglify",
                     paths: {
-                        "jquery": "empty:"
+                        "jquery": "empty:",
+                        'angular': "empty:",
+                        'angularAMD': "empty:",
+                        'ngload': "empty:"
                     },
                     name: "main"
                 }
@@ -216,6 +219,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask('setUpDev', ['exec:compassGem', 'exec:bowerInstall', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
+
+    // note for angularAMD the r.js optimisation has been removed, and
+    // the clean job had been altered to retaing all JS scripts to the
     grunt.registerTask('build', ['test',
                                 'clean:build',
                                 'copy:srcToBuild',
