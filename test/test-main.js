@@ -13,7 +13,14 @@ requirejs.config({
     baseUrl: 'base/src/js',
 
     paths: {
-        jquery: 'libs/jquery/jquery.min'
+        jquery: 'libs/jquery/jquery.min',
+        angular: 'libs/angular/angular.min'
+    },
+
+    shim: {
+        angular: {
+            exports : 'angular'
+        }
     },
 
     // ask Require.js to load these files (all our tests)

@@ -82,6 +82,11 @@ module.exports = function(grunt) {
                         flatten: true, filter: 'isFile'
                     },
                     {
+                        expand: true, cwd: 'bower_components/angular/',
+                        src: 'angular.min.js', dest: 'src/js/libs/angular/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
                         expand: true,
                         cwd: 'bower_components/bootstrap-sass-official/assets/fonts/',
                         src: '**',
@@ -135,7 +140,8 @@ module.exports = function(grunt) {
                     out: "build/js/main.js",
                     optimize: "uglify",
                     paths: {
-                        "jquery": "empty:"
+                        "jquery": "empty:",
+                        "angular": "empty:"
                     },
                     name: "main"
                 }

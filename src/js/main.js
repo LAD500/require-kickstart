@@ -2,21 +2,19 @@
 
 require.config({
     paths: {
-        jquery: ['//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',  'libs/jquery/jquery.min']
+        jquery: ['//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min',  'libs/jquery/jquery.min'],
+        angular: ['//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min',  'libs/angular/angular.min']
+    },
+    shim: {
+        angular: {
+            exports : 'angular'
+        }
     }
 });
 
 define('modernizr', [], Modernizr);
 
-requirejs(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, SimpleApp) {
-    'use strict';
-
-    console.log("App starts here");
-
-    console.log(SimpleApp.add(2,3,4,5));
-
-    SimpleApp.testGet();
-    SimpleApp.testPost();
-
+requirejs(['app/webapp', 'app/maincontroller'], function (app) {
+    app.init();
 });
 
