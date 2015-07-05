@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    'use strict';
 
     var jsFiles = ['Gruntfile.js', 'testserver.js', 'src/**/*.js', 'test/**/*.js'];
 
@@ -76,15 +77,15 @@ module.exports = function(grunt) {
         },
         htmlmin: {
             build: {
-                options: {                                 // Target options
+                options: {
                     removeComments: true,
                     collapseWhitespace: true
                 },
                 files: [{
                     expand: true,
-                    cwd: 'build/js/app',
+                    cwd: 'tmp/js/app',
                     src: '**/*.html',
-                    dest: 'build/js/app'
+                    dest: 'tmp/js/app'
                 }]
             }
         },
@@ -114,13 +115,23 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            srcToBuild: {
+            tempToBuild: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'tmp/',
+                        src: '**',
+                        dest: 'build/'
+                    }
+                ]
+            },
+            srcToTemp: {
                 files: [
                     {
                         expand: true,
                         cwd: 'src/',
                         src: '**',
-                        dest: 'build/'
+                        dest: 'tmp/'
                     }
                 ]
             }
@@ -151,12 +162,13 @@ module.exports = function(grunt) {
         },
         clean: {
             build: ["build/"],
+            temp: ["tmp/"],
             buildChildren: ["build/scss/", "build/css/main.css.map", "build/js/app", "build/js/main.js"]
         },
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: "src/js",
+                    baseUrl: "tmp/js",
                     out: "build/js/main.js",
                     optimize: "uglify",
                     inlineText: true,
@@ -169,7 +181,7 @@ module.exports = function(grunt) {
                     },
                     name: "main",
                     uglify: {
-                        no_mangle: true // this is a work around cuased by uglify mangling issues needs to be addressed
+                        no_mangle: true // this is a work around caused by uglify mangling issues needs to be addressed
                     }
                 }
             }
@@ -237,11 +249,13 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
     grunt.registerTask('build', ['test',
                                 'clean:build',
-                                'copy:srcToBuild',
+                                'copy:srcToTemp',
                                 'htmlmin',
-                                'compass:production',
+                                'copy:tempToBuild',
                                 'clean:buildChildren',
-                                'requirejs:compile']);
+                                'requirejs:compile',
+                                'compass:production',
+                                'clean:temp']);
     grunt.registerTask('launchSrc', ['concurrent:src']);
     grunt.registerTask('launchBuild', ['build','concurrent:build']);
     grunt.registerTask('launchPlato', ['plato','open:plato']);
