@@ -12,8 +12,14 @@ requirejs.config({
     // Karma serves files from '/base'
     baseUrl: 'base/src/js',
 
-    paths: {
-        jquery: 'libs/jquery/jquery.min'
+    'paths': {
+        'jquery': 'libs/jquery/jquery.min',
+        'jquery.bootstrap': 'js/libs/bootstrap.min'
+    },
+    'shim': {
+        'jquery.bootstrap': {
+            deps: ["jquery"]
+        }
     },
 
     // ask Require.js to load these files (all our tests)

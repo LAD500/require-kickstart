@@ -1,14 +1,19 @@
-/*global require*/
 
 require.config({
-    paths: {
-        jquery: ['//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min',  'libs/jquery/jquery.min']
+    'paths': {
+        'jquery': ['//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min',  'libs/jquery/jquery.min'],
+        'jquery.bootstrap': ['//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min', 'libs/bootstrap/bootstrap.min']
+    },
+    'shim': {
+        'jquery.bootstrap': {
+            deps: ["jquery"]
+        }
     }
 });
 
 define('modernizr', [], Modernizr);
 
-requirejs(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, SimpleApp) {
+requirejs(['jquery', 'modernizr', 'app/simpleapp', 'jquery.bootstrap'], function ($, Modernizr, SimpleApp) {
     'use strict';
 
     console.log("App starts here");
@@ -19,4 +24,3 @@ requirejs(['jquery', 'modernizr', 'app/simpleapp'], function ($, Modernizr, Simp
     SimpleApp.testPost();
 
 });
-
