@@ -3,36 +3,62 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/libs/modernizr/modernizr.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/libs/modernizr/modernizr.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-        <p>Require Kickstart Project.</p>
+<nav role="navigation" class="navbar navbar-default" ng-controller="CollapseCtrl">
+    <a href="#" class="navbar-brand">Angular-require-kickstart</a>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div id="navbarCollapse" class="collapse navbar-collapse" collapse="isCollapsed">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Messages</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+        </ul>
+    </div>
+</nav>
 
-        <div class="row">
-            <div class="col-md-4"><p>Envelope icon: <span class="glyphicon glyphicon-envelope"></span></p></div>
-            <div class="col-md-4" ng-bind="{{1+8}}"></div>
-            <div class="col-md-4">Test</div>
+<div class='container-fluid'>
+    <div class="row">
+        <div class="col-md-4">
+            <h3><span class="glyphicon glyphicon-flash"></span> Grunt build</h3>
+            <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque quis sapien pulvinar, convallis est at, aliquet augue.</p>
         </div>
-
-        <div class="row">
-            <div class="col-md-4"><p>Angular controller tested here</p></div>
-            <div class="col-md-4" ng-controller="MainController as MainCtrl">
-                <span ng-bind="MainCtrl.time"></span>
-            </div>
-            <div class="col-md-4">Test</div>
+        <div class="col-md-4">
+            <h3><span class="glyphicon glyphicon-fire"></span> Sass & Bootstrap</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mollis finibuss sem. Duis vehicula mollis rutrum. Phasellus erat elit, finibus in blandit congue, scelerisque sit amet est.</p>
         </div>
+        <div class="col-md-4">
+            <h3><span class="glyphicon glyphicon-cog"></span> RequireJS & AngularJS</h3>
+            <p>Sed mattis velit nec tempus viverra. Sed id justo finibus, pretium ligula ut, interdum mauris.</p>
+            <p>Brief math check to demo that angular is working : 2+3={{2+3}}</p>
+        </div>
+    </div>
+</div>
 
-        <script data-main="js/main" src="js/libs/require/require.min.js"></script>
-    </body>
+<script data-main="js/main" src="http://requirejs.org/docs/release/2.1.18/minified/require.js"></script>
+<script>window.require || document.write("<script data-main='js/main' src='js/libs/require/require.min.js'><\/script>")</script>
+
+</body>
 </html>

@@ -69,8 +69,23 @@ module.exports = function(grunt) {
         uglify: {
             requirejs: {
                 files: {
-                    'src/js/libs/require/require.min.js': ['bower_components/requirejs/require.js']
+                    'src/js/libs/require/require.min.js': ['bower_components/requirejs/require.js'],
+                    'src/js/libs/require-text/text.min.js': ['bower_components/requirejs-text/text.js']
                 }
+            }
+        },
+        htmlmin: {
+            build: {
+                options: {                                 // Target options
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'build/js/app',
+                    src: '**/*.html',
+                    dest: 'build/js/app'
+                }]
             }
         },
         copy: {
@@ -84,6 +99,11 @@ module.exports = function(grunt) {
                     {
                         expand: true, cwd: 'bower_components/angular/',
                         src: 'angular.min.js', dest: 'src/js/libs/angular/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
+                        expand: true, cwd: 'bower_components/angular-bootstrap/',
+                        src: 'ui-bootstrap-tpls.min.js', dest: 'src/js/libs/uibootstrap/',
                         flatten: true, filter: 'isFile'
                     },
                     {
@@ -139,11 +159,18 @@ module.exports = function(grunt) {
                     baseUrl: "src/js",
                     out: "build/js/main.js",
                     optimize: "uglify",
+                    inlineText: true,
+                    stubModules: ['text','angular'],
                     paths: {
                         "jquery": "empty:",
-                        "angular": "empty:"
+                        "text": "libs/require-text/text.min",
+                        "angular": "empty:",
+                        "uiBootstrap": "empty:"
                     },
-                    name: "main"
+                    name: "main",
+                    uglify: {
+                        no_mangle: true // this is a work around cuased by uglify mangling issues needs to be addressed
+                    }
                 }
             }
         },
@@ -204,12 +231,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     grunt.registerTask('setUpDev', ['exec:compassGem', 'exec:bowerInstall', 'copy:bowerToSrc', 'modernizr:dist:bust', 'uglify:requirejs']);
     grunt.registerTask('test', ['jsonlint', 'jshint', 'karma']);
     grunt.registerTask('build', ['test',
                                 'clean:build',
                                 'copy:srcToBuild',
+                                'htmlmin',
                                 'compass:production',
                                 'clean:buildChildren',
                                 'requirejs:compile']);

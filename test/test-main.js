@@ -13,13 +13,17 @@ requirejs.config({
     baseUrl: 'base/src/js',
 
     paths: {
-        jquery: 'libs/jquery/jquery.min',
-        angular: 'libs/angular/angular.min'
+        'jquery': 'libs/jquery/jquery.min',
+        'text': 'lib/require-text/text.min',
+        'angular': 'libs/angular/angular.min',
+        'uiBootstrap': 'libs/uibootstrap/ui-bootstrap-tpls.min'
     },
-
     shim: {
-        angular: {
+        'angular': {
             exports : 'angular'
+        },
+        'uiBootstrap': {
+            deps: ['angular']
         }
     },
 
