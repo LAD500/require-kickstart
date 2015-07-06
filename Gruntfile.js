@@ -179,10 +179,7 @@ module.exports = function(grunt) {
                         "angular": "empty:",
                         "uiBootstrap": "empty:"
                     },
-                    name: "main",
-                    uglify: {
-                        no_mangle: true // this is a work around caused by uglify mangling issues needs to be addressed
-                    }
+                    name: "main"
                 }
             }
         },

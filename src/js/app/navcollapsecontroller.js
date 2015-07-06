@@ -1,5 +1,5 @@
 define(['app/webapp'], function(app) {
-    app.controller('CollapseCtrl', function ($scope) {
+    app.controller('CollapseCtrl',['$scope', function ($scope) {
         $scope.isCollapsed = true;
-    });
+    }]);
 });
