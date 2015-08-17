@@ -13,10 +13,14 @@ requirejs.config({
     baseUrl: 'base/src/js',
 
     'paths': {
+        'es5shim': ['libs/es5shim/es5-shim.min'],
         'jquery': 'libs/jquery/jquery.min',
         'jquery.bootstrap': 'js/libs/bootstrap.min'
     },
     'shim': {
+        'jquery': {
+            deps: ["es5shim"]
+        },
         'jquery.bootstrap': {
             deps: ["jquery"]
         }

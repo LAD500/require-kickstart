@@ -82,6 +82,11 @@ module.exports = function(grunt) {
                         flatten: true, filter: 'isFile'
                     },
                     {
+                        expand: true, cwd: 'bower_components/es5-shim/',
+                        src: 'es5-shim.min.js', dest: 'src/js/libs/es5shim/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
                         expand: true, cwd: 'bower_components/bootstrap-sass-official/assets/javascripts/',
                         src: 'bootstrap.min.js', dest: 'src/js/libs/bootstrap/',
                         flatten: true, filter: 'isFile'
@@ -140,6 +145,7 @@ module.exports = function(grunt) {
                     out: "build/js/main.js",
                     optimize: "uglify",
                     paths: {
+                        "es5shim": "empty:",
                         "jquery": "empty:",
                         "jquery.bootstrap": "empty:"
                     },
