@@ -98,6 +98,11 @@ module.exports = function(grunt) {
                         flatten: true, filter: 'isFile'
                     },
                     {
+                        expand: true, cwd: 'bower_components/es5-shim/',
+                        src: 'es5-shim.min.js', dest: 'src/js/libs/es5shim/',
+                        flatten: true, filter: 'isFile'
+                    },
+                    {
                         expand: true, cwd: 'bower_components/angular/',
                         src: 'angular.min.js', dest: 'src/js/libs/angular/',
                         flatten: true, filter: 'isFile'
@@ -174,6 +179,7 @@ module.exports = function(grunt) {
                     inlineText: true,
                     stubModules: ['text','angular'],
                     paths: {
+                        "es5shim": "empty:",
                         "jquery": "empty:",
                         "text": "libs/require-text/text.min",
                         "angular": "empty:",

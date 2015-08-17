@@ -13,6 +13,7 @@ requirejs.config({
     baseUrl: 'base/src/js',
 
     paths: {
+        'es5shim': 'libs/es5shim/es5-shim.min',
         'jquery': 'libs/jquery/jquery.min',
         'text': 'lib/require-text/text.min',
         'angular': 'libs/angular/angular.min',
@@ -20,6 +21,7 @@ requirejs.config({
     },
     shim: {
         'angular': {
+            deps: ['es5shim'],
             exports : 'angular'
         },
         'uiBootstrap': {
